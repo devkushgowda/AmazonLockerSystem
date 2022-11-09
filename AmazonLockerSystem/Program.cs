@@ -4,6 +4,12 @@ namespace AmazonLockerSystem
 {
     class Program
     {
+        /// <summary>
+        /// Author:     Kushan devarajegowda
+        /// Github:     devkushgowda
+        /// LinkedIn:   kushan-devarajegowda
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             var ls = new LockerSystem();
@@ -15,7 +21,6 @@ namespace AmazonLockerSystem
             ls.Retrive(3);
             ls.Retrive(5);
             ls.Store(new Package { Size = Size.Medium, Id = 3 });
-
             Console.ReadKey();
         }
     }

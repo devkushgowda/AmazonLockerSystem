@@ -5,7 +5,18 @@ namespace AmazonLockerSystem
 
 {
     /// <summary>
-    /// Configurable locker system, That allows to store parcel based on the available locker size that is >= package size.
+    /// Configurable locker system, That allows to store package based on the available locker size that is >= package size.
+    /// 
+    /// :::::::::Store:::::::::
+    /// 
+    /// Time complexity:    O(1)
+    /// Space complexity:   O(1)
+    /// 
+    /// ::::::::Retrive:::::::::
+    /// 
+    /// Time complexity:    O(1)
+    /// Space complexity:   O(1)
+    /// 
     /// </summary>
     public class LockerSystem : ILocker
     {
@@ -18,14 +29,8 @@ namespace AmazonLockerSystem
         /// Dictionary mapping which package is stored in which locker.
         /// </summary>
         private Dictionary<int, Size> packageMap = new Dictionary<int, Size>();
-        public void Init()
-        {
-            AddLocker(Size.Large, 3);
-            AddLocker(Size.Small, 3);
-            AddLocker(Size.Medium, 3);
-        }
 
-        private bool AddLocker(Size s, int capacity)
+        public bool AddLocker(Size s, int capacity)
         {
             lock (this)
             {
@@ -56,14 +61,14 @@ namespace AmazonLockerSystem
                     return null;
                 }
                 var locker = packageMap[packageId];
-                var parcel = lockers[locker].Remove(packageId);
+                var package = lockers[locker].Remove(packageId);
                 packageMap.Remove(packageId);
-                return parcel;
+                return package;
             }
         }
 
         /// <summary>
-        /// Store the parcel into best fit locker size.
+        /// Store the package into best fit locker size.
         /// </summary>
         /// <param name="package"></param>
         /// <returns>True if success or False.</returns>

@@ -6,14 +6,12 @@ namespace AmazonLockerSystem
 {
     public class Locker
     {
-        private readonly Size _size;
-
         public int Capacity { private set; get; }
         public Size Size { private set; get; }
 
         public Locker(Size size, int capacity)
         {
-            _size = size;
+            Size = size;
             Capacity = capacity;
         }
         public Dictionary<int, Package> Storage { get; set; } = new Dictionary<int, Package>();
@@ -24,11 +22,11 @@ namespace AmazonLockerSystem
         {
             if (!HasCapacity() || Storage.ContainsKey(package.Id))
             {
-                Logger.Error($"Capacity full to insert package {package} to '{_size}' locker.");
+                Logger.Error($"Capacity full to insert package {package} to '{Size}' locker.");
                 return false;
             }
             Storage.Add(package.Id, package);
-            Logger.Info($"Added {package} to '{_size}' locker.");
+            Logger.Info($"Added {package} to '{Size}' locker.");
             return true;
         }
 
@@ -36,12 +34,12 @@ namespace AmazonLockerSystem
         {
             if (!Storage.ContainsKey(id))
             {
-                Logger.Error($"Package packageId: {id} does not exists in '{_size}' locker.");
+                Logger.Error($"Package packageId: {id} does not exists in '{Size}' locker.");
                 return null;
             }
             var res = Storage[id];
             Storage.Remove(id);
-            Logger.Warn($"Removed packageId: {id}, {res} from '{_size}' locker.");
+            Logger.Warn($"Removed packageId: {id}, {res} from '{Size}' locker.");
             return res;
         }
     }
